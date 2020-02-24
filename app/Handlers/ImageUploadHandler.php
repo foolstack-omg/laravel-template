@@ -33,6 +33,9 @@ class ImageUploadHandler
         // 将图片移动到我们的目标存储路径中
         $file->move($upload_path, $filename);
 
+        // 解决IOS下图片转向
+        Image::make($upload_path . '/' . $filename)->orientate()->save();
+
         // 如果限制了图片宽度，就进行裁剪
         if ($max_width && $extension != 'gif') {
 
@@ -41,7 +44,7 @@ class ImageUploadHandler
         }
 
         return [
-            'path' => "$folder_name/$filename"
+            'path' => url('/')."/storage/$folder_name/$filename"
         ];
     }
 
