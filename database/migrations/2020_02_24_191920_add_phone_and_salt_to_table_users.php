@@ -15,7 +15,7 @@ class AddPhoneAndSaltToTableUsers extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('phone', 11)->unique()->nullable()->default(null)->comment('手机号码');
-            $table->char('salt', 6)->comment('密码盐');
+            $table->char('salt', 6)->default('')->comment('密码盐');
         });
     }
 
